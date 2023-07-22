@@ -66,26 +66,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               },
             ),
-            // Row(
-            //   mainAxisSize: MainAxisSize.max,
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     FloatingActionButton(
-            //       onPressed: () {
-            //         BlocProvider.of<CounterCubit>(context).decrement();
-            //       },
-            //       tooltip: 'Decrement',
-            //       child: const Icon(Icons.remove),
-            //     ),
-            //     FloatingActionButton(
-            //       onPressed: () {
-            //         BlocProvider.of<CounterCubit>(context).increment();
-            //       },
-            //       tooltip: 'Increment',
-            //       child: const Icon(Icons.add),
-            //     ),
-            //   ],
-            // ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    context.read<CounterCubit>().decrement();
+                  },
+                  tooltip: 'Decrement',
+                  child: const Icon(Icons.remove),
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    context.read<CounterCubit>().increment();
+                  },
+                  tooltip: 'Increment',
+                  child: const Icon(Icons.add),
+                ),
+              ],
+            ),
           ],
         ),
       ),

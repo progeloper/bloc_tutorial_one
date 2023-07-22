@@ -3,10 +3,17 @@ import 'package:bloc_tutorial_one/presentation/home_page.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'logic/cubit/counter_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+
   final connectivity = Connectivity();
   runApp(MyApp(
     connectivity: connectivity,
@@ -27,7 +34,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
 
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -37,7 +43,8 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(
-              internetCubit: BlocProvider.of<InternetCubit>(context)),
+            internetCubit: context.watch<InternetCubit>(),
+          ),
         ),
       ],
       child: MaterialApp(
